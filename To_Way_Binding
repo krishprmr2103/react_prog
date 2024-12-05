@@ -1,0 +1,31 @@
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+
+function App() {
+  
+  const sub = (e)=>{e.preventDefault();}
+  let [uname,setuname]=useState('')
+  let [pass,setpass]=useState('')
+  return(
+    <div>
+        <form onSubmit={(e)=>{sub(e);  console.log(uname); console.log(pass); }} >
+      
+          <label htmlFor="uname"> Username : <input type="text" placeholder='Enter your name ' name='uname' 
+              value={uname} 
+              onChange={(event)=>{
+                setuname(event.target.value)
+              }} /></label> 
+          
+          <label htmlFor="uname">password : <input type="password"   placeholder='Enter Password ' name='uname'value={pass} 
+              onChange={(event)=>{
+                setpass(event.target.value)
+              }} /></label>
+          <button className='btn1' >Login</button>
+        </form>
+    </div>
+  )
+}
+
+export default App
