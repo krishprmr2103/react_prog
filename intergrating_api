@@ -1,0 +1,72 @@
+app.jsx:
+
+import axios from "axios";
+import React, { useState } from "react";
+const App =  () => {
+  const [data ,setdata]=useState([])
+  // here async await concept is used, it take wait unit the api data not comes.
+  // why used here, becuase api show the pending and next code of line going to run. it does not wait the api calling
+  const getData = async() => { //it wait until the proccess is not fullfiled
+  const response = await axios.get('https://picsum.photos/v2/list')
+  // to pass the data into the data variable :
+  setdata(response.data)
+  for(var i=0;i<30;i++){
+    console.log("", data[i].url) 
+  }
+  };
+  return (
+    <>
+      <div className="data-container">
+        <button className="getdata-button" onClick={getData}>get data</button>
+      </div>
+      <div className="data">
+          {data.map(function(elem ,idx){ //ind is used to take the new id to every pic.
+          return <div key={idx}   className="photo">  <img src={elem.url} alt="" /> </div>
+        })} 
+      </div>  
+    </>
+  );
+};
+export default App;
+
+
+index.css:-
+
+
+.data-container{
+    padding: 30px;
+    margin: 0 auto;
+
+  }
+/* Styling the button */
+.getdata-button {
+    background-color: #4CAF50; /* Green background */
+    color: white;            /* White text */
+    border: none;            /* No border */
+    padding: 10px 20px;      /* Padding */
+    text-align: center;      /* Centered text */
+    text-decoration: none;   /* No underline */
+    font-size: 16px;         /* Font size */
+    border-radius: 5px;      /* Rounded corners */
+    cursor: pointer;         /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
+  
+  /* Hover effect */
+  .getdata-button:hover {
+    background-color: #45a049; /* Darker green */
+  }
+  .data{
+    width: 950px; height: max-content; padding: 20px;
+    margin: 30px;background-color: rgba(80, 4, 35, 0.795);
+  }
+  .photo{
+    color: black;
+    background-color: antiquewhite;
+    margin: 20px;
+     
+    /* width: 40px; */
+  }
+  .photo img{
+    height: fit-content;
+  }
