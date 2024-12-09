@@ -72,3 +72,39 @@ index.css:-
     height: fit-content;
   }
 
+//here use the  useEffect hook :
+
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+const App =  () => {
+  const [data ,setdata]=useState([])
+  // here async await concept is used, it take wait unit the api data not comes.
+  // why used here, becuase api show the pending and next code of line going to run. it does not wait the api calling
+  const getData = async() => { //it wait until the proccess is not fullfiled
+  const response = await axios.get('https://picsum.photos/v2/list')
+  // to pass the data into the data variable :
+  setdata(response.data)
+  for(var i=0;i<30;i++){
+    console.log("", data[i].url) 
+  }
+  };
+
+  useEffect(()=>{
+    getData()
+  }, [])
+  return (
+    <>
+      <div className="data-container">
+        {/* <button className="getdata-button" onClick={getData}>get data</button> */}
+      </div>
+      <div className="data">
+          {data.map(function(elem ,idx){ //ind is used to take the new id to every pic.
+          return <div key={idx}   className="photo">  <img src={elem.url} alt="" /> </div>
+        })} 
+      </div>  
+    </>
+  );
+};
+export default App;
+
+
