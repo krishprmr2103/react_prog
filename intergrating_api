@@ -1,5 +1,4 @@
 app.jsx:
-
 import axios from "axios";
 import React, { useState } from "react";
 const App =  () => {
@@ -30,7 +29,9 @@ const App =  () => {
 export default App;
 
 
+
 index.css:-
+
 
 
 .data-container{
@@ -70,3 +71,4 @@ index.css:-
   .photo img{
     height: fit-content;
   }
+
