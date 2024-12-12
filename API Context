@@ -1,0 +1,121 @@
+context API:-
+------------------>
+
+	The Context API in React is a feature that allows you to share data (or "context") across multiple components without having to pass props manually 
+	at every level of the component tree. It provides a way to manage state or data that needs to be accessed by multiple components in your application.
+
+
+//create an animation playlist in this bellow topics will be cover.
+
+
+							data passing------top--to--bottom------>	
+the props pass the data in top to bottom  direction  for exp : ab------>ba-------->bc------->cd but cd can't pass  the data to ab (it can't the data bottom to top)
+so, its more problematic so we use the contect API for state management
+
+--->it's state management tool.
+--->which is centrelised the data in between the all tag.
+--->used for centrelised the data.
+
+
+
+---->// to use the data of the UserContext data in App and Other file so you should to wrap(make chield) to the <App> of your centrelised file
+----> but the we can't use the <App> file all  code.means if i write the <h1>hey !</h1> it will not show on display 
+----> so we pass the 'props' or '{children}' object in function like this 
+
+users =({childre})=>{}
+
+--> 'console.log(props.children)' 
+
+* How to create a context
+
+--->export const DataContext = ({children})=>{}
+
+<DataContext.Provider value={username}> </DataContext.Provider>
+
+
+
+for exp :=
+
+UserContext.jsx :- in context file 
+------------------------------------>
+import React, { createContext } from "react";
+
+// Centralize data using Context and export for use in other components
+export const DataContext = createContext();
+
+const UserContext = ({ children }) => {
+  const username = "krishnarth parmar";
+  const age = 20;
+  const std ='TYBCA (sem - 6)';
+
+  const student_info ={username,age,std}
+
+
+  return (
+    // <DataContext.Provider value={username} >
+    <DataContext.Provider value={student_info} >
+      {children}
+    </DataContext.Provider>
+  );
+};
+
+export default UserContext;
+
+
+App.jsx :-
+----------->
+
+// import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import { DataContext } from "./context/UserContext";
+
+import About from './components/About'
+import Footer from './components/Footer'
+
+const App =  () => {
+  // const data= useContext(DataContext) single data access :
+
+  // multiple data access from the centrelised data context
+  const {username,age,std}= useContext(DataContext)
+  return (
+    <>
+      <header>
+        <div class="logo">Marvels Books Store</div>
+        <nav> </nav>
+      </header>
+      <About/>
+        {/*  */}
+      <Footer/>
+    </>
+
+    
+   
+  );
+};
+export default App;
+
+
+About.jsx :- in the componentfolder
+----------------------------------->
+
+import { data } from "react-router-dom";
+import { DataContext } from "../context/UserContext";
+import { useContext } from "react";
+function About() {
+  // const data= useContext(DataContext) single data access :
+
+  // multiple data access from the centrelised data context
+  const {username,age,std}= useContext(DataContext)
+    return(
+     <>
+       <h2>About Us </h2>
+       <h1>My name is : {username}</h1>
+       <h1>Age : {age}</h1>
+       <h1>Standard : {std}</h1>
+     </>
+    ) 
+
+  }
+  
+  export default About;
+  
