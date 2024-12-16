@@ -1,0 +1,39 @@
+Node vs express, what is the  real deal ?
+What is express js ?
+Why express js ?
+Routing
+Middleware
+Request and Response
+Templates
+Static files
+HTTP Methods – get and post
+Error Handling
+
+Explaination in details
+
+Installing express : npm I express
+ Make script.js for the 
+1)Routing : bellow code is written for the routing 
+
+	const exp = require('express')
+const app = exp()
+app.get('/',function(req,res){
+    res.send('hey miss');
+})
+app.get('/home',function(req,res){
+    res.send('hey ! form my Home ');
+})
+app.listen(3000)
+
+   run them within : node .\script.js and  npx nodemon .\script.js
+  res : ma apde respondse kariye chheh te data hoi 
+  req : usere moklela data hoi 
+
+2)MiddleWare :
+
+Middleware in Express.js is a function that is executed during the lifecycle of a request to the server. It has access to the request object (req), the response object (res), and the next function, which allows you to pass control to the next middleware function in the stack.
+ The middleware is run before the all routes. which means the middleware is middle between the     all the routes . 
+ The middleware is made using the  ‘use()’ method and their have function(req,res)
+
+
+
